@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ['test']
+  pull_request:
+    branches: ['test']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+          
+      - name: 'modify-deployment'
+        run: |
+          apk add --update sed git
+          sed -i "s/hongjsx\/horpakjs:v1\.[0-9]\+/hongjsx\/horpakjs:1.${{ github.run_number }}/g" horpakjs-depl.yaml
+          cat horpakjs-depl.yaml
+
+      - name: 'commit deployment.yaml'
+        run: |
+          git config --global user.email "sompote.r@gmail.com"
+          git config --global user.name "Sompote"
+          git add .
+          git commit -m "Modified horpakjs-depl.yaml for xx"
+          git push
