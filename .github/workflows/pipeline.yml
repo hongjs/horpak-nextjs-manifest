@@ -1,10 +1,12 @@
-name: Docker Image CI
+name: pipeline
 
 on:
-  push:
-    branches: ['test']
-  pull_request:
-    branches: ['test']
+  workflow_dispatch:
+    inputs:
+      DOCKER_TAG:
+        required: true
+        default: 'v1.0'
+        type: string
 
 jobs:
   build:
@@ -13,17 +15,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-          
-      - name: 'modify-deployment'
+
+      # Replace the image tag in horpakjs-depl.yaml with the build number
+      - name: Modify Deployment
         run: |
-          apk add --update sed git
-          sed -i "s/hongjsx\/horpakjs:v1\.[0-9]\+/hongjsx\/horpakjs:1.${{ github.run_number }}/g" horpakjs-depl.yaml
+          sed -i "s/hongjsx\/horpakjs:v1\.[0-9]\+/hongjsx\/horpakjs:${{ inputs.DOCKER_TAG }}/g" horpakjs-depl.yaml
           cat horpakjs-depl.yaml
 
-      - name: 'commit deployment.yaml'
+      # Commit and push changes back to the repository
+      - name: Commit files
         run: |
+          git config --global user.name "Sompote R"
           git config --global user.email "sompote.r@gmail.com"
-          git config --global user.name "Sompote"
           git add .
-          git commit -m "Modified horpakjs-depl.yaml for xx"
-          git push
+          git commit -m "Modified horpakjs-depl.yaml for ${{ inputs.DOCKER_TAG }}"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
+          branch: main
+          force: true
