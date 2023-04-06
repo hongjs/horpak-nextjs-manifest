@@ -14,8 +14,10 @@ spec:
     spec:
       containers:
         - name: horpakjs
-          image: hongjsx/horpakjs:v1.65
+          image: hongjsx/horpakjs:v1.12
           imagePullPolicy: IfNotPresent
+          imagePullSecrets:
+            - name: registry-pull-secret
           volumeMounts:
             - name: mnt
               mountPath: /app/.env.production
