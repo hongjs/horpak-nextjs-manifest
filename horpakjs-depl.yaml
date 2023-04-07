@@ -16,8 +16,6 @@ spec:
         - name: horpakjs
           image: hongjsx/horpakjs:v1.12
           imagePullPolicy: IfNotPresent
-          imagePullSecrets:
-            - name: registry-pull-secret
           volumeMounts:
             - name: mnt
               mountPath: /app/.env.production
@@ -28,6 +26,8 @@ spec:
               cpu: '1000m' # 1.0 CPU-core
             requests:
               cpu: '500m' # 0.5 CPU-core
+      imagePullSecrets:
+        - name: registry-pull-secret
       volumes:
         - name: mnt
           configMap:
