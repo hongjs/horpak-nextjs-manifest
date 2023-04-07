@@ -27,7 +27,7 @@ spec:
             requests:
               cpu: '500m' # 0.5 CPU-core
       imagePullSecrets:
-        - name: registry-pull-secret
+        - name: regcred
       volumes:
         - name: mnt
           configMap:
