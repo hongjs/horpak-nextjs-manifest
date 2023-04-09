@@ -4,11 +4,12 @@ metadata:
   name: horpakjs-env
 data:
   .env: |-
-    NODE_ENV=development
+    NODE_ENV=production
     MONGO_URI=mongodb://localhost:27017/admin
-    DB_NAME=cplace-cluster
+    DB_NAME=dbName
     TOKEN_SECRET=xxx
     TOKEN_EXPIRES_IN=7d
+    TURNSTILE_SECRET=xxx
     GOOGLE_ID=googleId-xxxx.apps.googleusercontent.com
     GOOGLE_SECRET=secret
     GOOGLE_REDIRECT_URI=http://localhost:3000/auth/spreadsheet/callback
@@ -16,5 +17,5 @@ data:
     NEXTAUTH_URL=http://localhost:3000/
     NEXTAUTH_SECRET=secret
     BASE_URL=http://localhost:3000
+    SECRET=secret
 immutable: true
-  SECRET=secret
