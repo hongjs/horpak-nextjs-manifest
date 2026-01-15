@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: horpakjs
-          image: hongjsx/horpakjs:v1.7
+          image: hongjsx/horpakjs:v2.0.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: mnt
