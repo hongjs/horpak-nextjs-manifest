@@ -19,7 +19,7 @@ jobs:
       # Replace the image tag in horpakjs-depl.yaml with the build number
       - name: Modify Deployment
         run: |
-          sed -i "s/hongjsx\/horpakjs:v[0-9]\+\.[0-9]\+/hongjsx\/horpakjs:${{ inputs.DOCKER_TAG }}/g" horpakjs-depl.yaml
+          sed -i "s/hongjsx\/horpakjs:v[0-9]\+\.[0-9]\+\.[0-9]\+/hongjsx\/horpakjs:${{ inputs.DOCKER_TAG }}/g" horpakjs-depl.yaml
           cat horpakjs-depl.yaml
 
       # Commit and push changes back to the repository
