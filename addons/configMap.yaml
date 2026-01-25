@@ -18,4 +18,3 @@ data:
     NEXTAUTH_SECRET=secret
     BASE_URL=http://localhost:3000
     SECRET=secret
-immutable: true
