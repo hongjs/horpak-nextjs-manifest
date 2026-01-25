@@ -36,8 +36,11 @@ spec:
         - name: regcred
       volumes:
         - name: mnt
-          configMap:
-            name: horpakjs-env
+          secret:
+            secretName: horpakjs-env
+            items:
+              - key: .env
+                path: .env
 ---
 apiVersion: v1
 kind: Service
